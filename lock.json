@@ -1,5 +1,5 @@
 {
-    "memo": "f629e3ef907b4b946a6e5070c6728214734d69becd4b2065611efaf6d93ae47d",
+    "memo": "5037f72d3d7ac9c8b2a9f2478ed3f16d07156084574aa6b7b564e605b5e96769",
     "projects": [
         {
             "name": "github.com/gorilla/context",
@@ -11,8 +11,8 @@
         },
         {
             "name": "github.com/gorilla/mux",
-            "version": "v1.3.0",
-            "revision": "392c28fe23e1c45ddba891b0320b3b5df220beea",
+            "version": "v1.1",
+            "revision": "0eeaf8392f5b04950925b8a69fe70f110fa7cbfc",
             "packages": [
                 "."
             ]

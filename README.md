@@ -1,4 +1,5 @@
-# dep-example
+# dep - Golang Dependency Management Tool
+
 Sample repo for testing golang dependency tool dep
 
 # 介紹
@@ -13,7 +14,7 @@ Dep 是 Golang 的一個 Dependency Management tool。長久以來 Golang 一直
 
 由於現在 dep 還在開發階段，還有許多不確定性，比如說：
 1. [https://github.com/golang/dep/issues/119](https://github.com/golang/dep/issues/119)：像是現在 dep 當中的 menifest 和 lock 檔案都是使用 JSON 格式，但未來正式推出時可能會改成 TOML。
-2. [https://github.com/golang/dep/issues/168](https://github.com/golang/dep/issues/168)menifest 和 lock 兩個檔案命名是否會變更。
+2. [https://github.com/golang/dep/issues/168](https://github.com/golang/dep/issues/168)：manifest 和 lock 兩個檔案命名是否會變更。
 
 有興趣的可以追蹤一下 dep 的 issue：[https://github.com/golang/dep/issues?q=is%3Aopen+is%3Aissue+label%3Abefore-merge-into-toolchain](https://github.com/golang/dep/issues?q=is%3Aopen+is%3Aissue+label%3Abefore-merge-into-toolchain)
 
@@ -21,9 +22,11 @@ Dep 是 Golang 的一個 Dependency Management tool。長久以來 Golang 一直
 
 儘管 dep 還有許多的不確定性，我們還可以來看看這個未來可能會變成官方套件管理工具的 dep 要怎麼用。
 
-## menifest
-
 ## lock
+lock.json 這個檔案會記錄專案所有 dependency 的版本。
+
+
+## manifest
 
 ## dep init
 

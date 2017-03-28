@@ -25,14 +25,44 @@ Dep 是 Golang 的一個 Dependency Management tool。長久以來 Golang 一直
 ## lock
 lock.json 這個檔案會記錄專案所有 dependency 的版本。
 
-
 ## manifest
 
 ## dep init
+dep init 會解析你的 $GOPATH，並把你用到的 dependencies 加入到 manifest.json 中。而 lock.json 中則是會記錄完整個 dependencies，包含引用套件版本的 commit SHA 都會被記錄。
 
 ## dep ensure
+dep ensure 則是在你的專案有任何新的引用套件時，你想要確保所有的 dependencies 都被記錄下來時，就可以使用 `dep ensure` 指令。你也可以指定套件的版本，比如說我想要使用 mux 套件的 1.2.x 版本，就可以透過 `dep ensure github.com/gorilla/mux@~1.2.0` 的指令，dep 會幫你更新 manifest.json 和 lock.json 兩個檔案，同時更新 `vendor/` 目錄下的相關套件，請見 [此 commit](https://github.com/kevingo/dep-example/commit/3d04fe77781d449620f682e66341f1a21d4177a0)。
 
-## dep update
+如果你想要讓 dependencies 只鎖定大版號，可以用 `dep ensure github.com/gorilla/mux@^1.2.0`，這樣的話版本的版號會被鎖定在 `>= 1.2.0 , < 2.0.0` 之間。其他更多關於 `dep ensure` 的使用方法，可以用 `dep ensure -examples` 來閱讀 Help。
+
+## dep status
+dep status 可以讓用來檢視目前專案 dependencies 的狀態，如下所示：
+
+```bash
+$ dep status
+PROJECT                     CONSTRAINT  VERSION  REVISION  LATEST  PKGS USED
+github.com/gorilla/context  *           v1.1     a85d2e5   v1.1    1
+github.com/gorilla/mux      ~1.2.0      v1.2.0   b128961   v1.2.0  1
+```
+
+一些額外的指令如下：
+
+- `$ dep status -missing`：用來檢視目前尚未加入 dep 管理的套件。
+
+```bash
+PROJECT                    MISSING PACKAGES`
+github.com/armon/go-radix  [github.com/armon/go-radix]
+```
+
+另外要注意的是如果你有任何 missing 或未使用的套件，執行 `dep status` 時都會先提示。
 
 ## dep remove
 
+`dep remove` 會把 dependencies 從 manifest.json、lock.json 和 vendor 目錄中移除，請參考[此 commit](https://github.com/kevingo/dep-example/commit/28f5371615a0b65ffb22ab3f639316bf19d6a4c1)。
+
+如果你的程式碼中還有引用到這些套件時， dep 也會提示，你也可以使用 `-force` 指令來強制移除。
+ 
+```bash
+$ dep remove github.com/gorilla/mux
+not removing "github.com/gorilla/mux" because it is imported by "github.com/kevingo/dep-example" (pass -force to override)
+```

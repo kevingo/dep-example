@@ -22,11 +22,6 @@ Dep 是 Golang 的一個 Dependency Management tool。長久以來 Golang 一直
 
 儘管 dep 還有許多的不確定性，我們還可以來看看這個未來可能會變成官方套件管理工具的 dep 要怎麼用。
 
-## lock
-lock.json 這個檔案會記錄專案所有 dependency 的版本。
-
-## manifest
-
 ## dep init
 dep init 會解析你的 $GOPATH，並把你用到的 dependencies 加入到 manifest.json 中。而 lock.json 中則是會記錄完整個 dependencies，包含引用套件版本的 commit SHA 都會被記錄。
 

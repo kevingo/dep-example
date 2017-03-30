@@ -6,7 +6,7 @@ Dep 是 Golang 的一個 Dependency Management tool。長久以來 Golang 一直
 
 ![image](https://raw.githubusercontent.com/kevingo/dep-example/master/screenshot/dependency.png)
 
-而 Dep 是由 Peter Bourgon(go-kit 主要作者)、Jessie Frazelle(Google 工程師)、 Andrew Gerrand(Google Go team 成員) 和 Sam Boyer(gps 開發者) 等人共同開發。目前 dep 正在 pre-alpha，而它目標是成為 Golang 官方的 dependency tool，希望會在 1.10 release 的時候正式 merge 進入 toolchain 當中，也許之後你就可以用 `go dep` 來管理套件了，有興趣的可以參考他們的 [roadmap](https://github.com/golang/dep/wiki/Roadmap)。
+而 dep 是由 Peter Bourgon(go-kit 主要作者)、Jessie Frazelle(Google 工程師)、 Andrew Gerrand(Google Go team 成員) 和 Sam Boyer(gps 開發者) 等人共同開發。目前 dep 正在 pre-alpha，而它目標是成為 Golang 官方的 dependency management tool，希望會在 1.10 release 的時候正式 merge 進入 toolchain 當中，也許之後你就可以用 `go dep` 來管理套件了，有興趣的可以參考他們的 [roadmap](https://github.com/golang/dep/wiki/Roadmap)。
 
 # 注意
 
@@ -19,7 +19,7 @@ Dep 是 Golang 的一個 Dependency Management tool。長久以來 Golang 一直
 
 # 使用方式
 
-儘管 dep 整個專案還不是很穩定，我們還可以來看看這個未來可能會變成官方套件管理工具要怎麼使用。
+儘管 dep 整個專案還不是很穩定，但 Go Team 的 leader -  [Russ Cox](https://swtch.com/~rsc/) 大神也已經在 [mail thread 裡面鼓勵大家多使用 dep 了](https://groups.google.com/forum/#!msg/golang-nuts/PaGu2s9knao/Bq4vmFh7AgAJ)，因此我們還是可以來看看這個未來可能會變成官方工具的 dep 要怎麼使用。
 
 ## dep init
 dep init 會解析你的 `$GOPATH`，並把你用到的套件加入到 manifest.json 中。要注意的是，目前 dep 的行為會去檢查你引用的套件是否存在於 `$GOPATH` 中，如果有的話才會被加入到 manifest.json 中，可見原始碼 [init.go#L302](https://github.com/golang/dep/blob/1b193f4439655572d59fe1b87035870f1a7344ca/init.go#L302)。

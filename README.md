@@ -19,12 +19,12 @@ Dep 是 Golang 的一個 Dependency Management tool。長久以來 Golang 一直
 
 # 使用方式
 
-儘管 dep 還有許多的不確定性，我們還可以來看看這個未來可能會變成官方套件管理工具的 dep 要怎麼用。
+儘管 dep 整個專案還不是很穩定，我們還可以來看看這個未來可能會變成官方套件管理工具要怎麼使用。
 
 ## dep init
-dep init 會解析你的 $GOPATH，並把你用到的 dependencies 加入到 manifest.json 中。要注意的是，目前 dep 的行為會去檢查你引用的套件是否存在於 `$GOPATH` 中，如果有的話才會被加入到 manifest.json 中，可見原始碼 [init.go#L302](https://github.com/golang/dep/blob/1b193f4439655572d59fe1b87035870f1a7344ca/init.go#L302)。
+dep init 會解析你的 `$GOPATH`，並把你用到的套件加入到 manifest.json 中。要注意的是，目前 dep 的行為會去檢查你引用的套件是否存在於 `$GOPATH` 中，如果有的話才會被加入到 manifest.json 中，可見原始碼 [init.go#L302](https://github.com/golang/dep/blob/1b193f4439655572d59fe1b87035870f1a7344ca/init.go#L302)。
 
-而 lock.json 中則是會記錄完整個 dependencies，包含引用套件版本的 commit SHA 都會被記錄下來。
+而 lock.json 中則是會記錄完整的相依關係，包含引用套件版本的 commit SHA 和 dependencies graph 都會被記錄下來。
 
 ```
 {
@@ -51,7 +51,7 @@ dep init 會解析你的 $GOPATH，並把你用到的 dependencies 加入到 man
 ```
 
 ## dep ensure
-dep ensure 則是在你的專案有任何新的引用套件時，你想要確保所有的 dependencies 都被記錄下來時，就可以使用 `dep ensure` 指令。你也可以指定套件的版本，比如說我想要使用 mux 套件的 1.2.x 版本，就可以透過 `dep ensure github.com/gorilla/mux@~1.2.0` 的指令，dep 會幫你更新 manifest.json 和 lock.json 兩個檔案，同時更新 `vendor/` 目錄下的相關套件，請見 [此 commit](https://github.com/kevingo/dep-example/commit/3d04fe77781d449620f682e66341f1a21d4177a0)。
+dep ensure 則是在你想要確保所有的 dependencies 都被記錄下來時，就可以使用 `dep ensure` 指令，或是你想要指定某套件的版本，比如說我想要使用 mux 套件的 1.2.x 版本，就可以透過 `dep ensure github.com/gorilla/mux@~1.2.0` 的指令，dep 會幫你更新 manifest.json 和 lock.json 兩個檔案，同時更新 `vendor/` 目錄下的相關套件，請見 [此 commit](https://github.com/kevingo/dep-example/commit/3d04fe77781d449620f682e66341f1a21d4177a0)。
 
 如果你想要讓 dependencies 只鎖定大版號，可以用 `dep ensure github.com/gorilla/mux@^1.2.0`，這樣的話版本的版號會被鎖定在 `>= 1.2.0 , < 2.0.0` 之間。其他更多關於 `dep ensure` 的使用方法，可以用 `dep ensure -examples` 來閱讀 Help。
 
